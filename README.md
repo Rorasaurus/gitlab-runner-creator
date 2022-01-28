@@ -4,7 +4,9 @@ This project contains a BASH script to facilitate the creation of a Docker Gitla
 
 ## Usage
 
-The script can run from anywhere, but I'd suggest copying it to the home directory of a dedicated \n
+This assumes you've already deployed a server to host the Gitlab runners and configured and installed Docker.
+
+The script can run from anywhere, but I'd suggest copying it to the home directory of a dedicated
 user. This user will require permission to execute the 'docker' command.
 
 It will create a series of directories to be used as Docker volumes. By default it will create:
@@ -15,7 +17,7 @@ It will create a series of directories to be used as Docker volumes. By default 
 * /home/user/docker_volumes/[runner-name]/.ssh              ### Store for ssh keys required by runner
 * /home/user/docker_volumes/[runner-name]/.secrets          ### Store for secrets required by runner
 
-I'd advice against storing your secrets and ssh keys this way, but it's there if you want it. Consider \n
+I'd advice against storing your secrets and ssh keys this way, but it's there if you want it. Consider
 using something like Hashicorp Vault instead.
 
 Execute the script in the folling way:
@@ -31,7 +33,12 @@ Execute the script in the folling way:
 
 ## Trouble shooting
 
-Don't forget to make sure script executable by running:
+Don't forget to make the script executable by running:
 ```
 chmod +x create_runner.sh
+```
+
+Make sure the user running this script is in the 'docker' group:
+```
+usermod -G docker username
 ```
